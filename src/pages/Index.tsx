@@ -50,9 +50,9 @@ const founders = [
 
 
 const faqs = [
-  { q: "How much equity does Trizen take?", a: "Trizen takes 6% common equity in exchange for the program, ₹15L initial cheque and the founder stipend." },
+  { q: "How much equity does Trizen take?", a: "Trizen provides the program and founder stipend in exchange for equity." },
   { q: "Do I need to drop out?", a: "No. Trizen is built around the academic calendar. The stipend lets you ship full-time without leaving school." },
-  { q: "Is the program remote?", a: "Hybrid. Two in-person weeks in Bangalore (kickoff + Demo Day). Everything else is remote with weekly mentor sessions." },
+  { q: "Is the program remote?", a: "Hyderabad" },
   { q: "Who is eligible?", a: "Currently enrolled 3rd/4th/final-year students at any Indian college. Solo founders and teams of up to 3 are welcome. You should be able to commit 20+ hours/week." },
   { q: "What happens after the cohort?", a: "Lifetime access to the alumni network, follow-on capital intros, and ongoing mentorship as you scale." },
 ];
