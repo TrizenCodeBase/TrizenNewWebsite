@@ -15,7 +15,6 @@ export default function Terms() {
           >
             ← Back to home
           </button>
-          <ThemeToggle />
         </div>
       </header>
 

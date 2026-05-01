@@ -7,6 +7,10 @@ import Index from "./pages/Index.tsx";
 import Enquiry from "./pages/Enquiry.tsx";
 import Login from "./pages/Login.tsx";
 import Signup from "./pages/Signup.tsx";
+import Dashboard from "./pages/Dashboard.tsx";
+import ProblemLibrary from "./pages/ProblemLibrary.tsx";
+import Workflow from "./pages/Workflow.tsx";
+import ApplicationStatus from "./pages/ApplicationStatus.tsx";
 import Privacy from "./pages/Privacy.tsx";
 import Terms from "./pages/Terms.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -23,6 +27,10 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/problem-library" element={<ProblemLibrary />} />
+          <Route path="/workflow" element={<Workflow />} />
+          <Route path="/application-status" element={<ApplicationStatus />} />
           <Route path="/enquiry" element={<Enquiry />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />

@@ -58,10 +58,8 @@ export default function DashboardLayout() {
       <main className="flex-1 flex flex-col min-w-0">
         <header className="h-16 border-b border-border/50 flex items-center justify-end px-6 sticky top-0 bg-background/80 backdrop-blur z-10 md:hidden">
             {/* Mobile Header stuff could go here */}
-            <ThemeToggle />
         </header>
         <div className="hidden md:flex h-16 border-b border-border/50 items-center justify-end px-6 sticky top-0 bg-background/80 backdrop-blur z-10">
-             <ThemeToggle />
         </div>
         <div className="flex-1 overflow-y-auto">
           <Outlet />

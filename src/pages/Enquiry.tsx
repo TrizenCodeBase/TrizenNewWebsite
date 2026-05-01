@@ -93,7 +93,6 @@ export default function Enquiry() {
           <button type="button" className="text-sm text-muted-foreground hover:text-foreground" onClick={() => navigate("/")}>
             ← Back to home
           </button>
-          <ThemeToggle />
         </div>
       </header>
 

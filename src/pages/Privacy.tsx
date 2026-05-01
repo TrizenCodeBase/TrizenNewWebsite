@@ -15,7 +15,6 @@ export default function Privacy() {
           >
             ← Back to home
           </button>
-          <ThemeToggle />
         </div>
       </header>
 

@@ -1,5 +1,5 @@
 import type { FormEvent } from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Lock } from "lucide-react";
 
@@ -10,35 +10,58 @@ import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/use-toast";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
-const STORAGE_SUBMITTED_KEY = "trizen.application.submitted";
+const STORAGE_USERS_KEY = "trizen.users";
 const STORAGE_LOGGED_IN_KEY = "trizen.auth.loggedIn";
 
 export default function Login() {
   const navigate = useNavigate();
-
-  const hasApplied = useMemo(() => {
-    return localStorage.getItem(STORAGE_SUBMITTED_KEY) === "true";
-  }, []);
-
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    if (!hasApplied) {
-      toast({
-        title: "Apply first",
-        description: "You can log in once you’ve submitted the application.",
-      });
-      navigate("/signup", { replace: true });
-    }
-  }, [hasApplied, navigate]);
-
-  const canLogin = email.trim().length > 3;
+  const canLogin = email.trim().length > 0 && password.trim().length > 0;
 
   const login = (e: FormEvent) => {
     e.preventDefault();
     if (!canLogin) return;
-    localStorage.setItem(STORAGE_LOGGED_IN_KEY, "true");
-    toast({ title: "Logged in", description: "Welcome to the founder portal (demo)." });
+
+    // Get users from localStorage
+    const users = JSON.parse(localStorage.getItem(STORAGE_USERS_KEY) || "[]");
+    
+    // Find user with matching email
+    const user = users.find((u: any) => u.email === email);
+    
+    if (!user) {
+      toast({
+        title: "Login failed",
+        description: "No account found with this email",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Check password (in production, this should use proper password hashing)
+    if (user.password !== password) {
+      toast({
+        title: "Login failed",
+        description: "Incorrect password",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Store login state
+    localStorage.setItem(STORAGE_LOGGED_IN_KEY, JSON.stringify({
+      userId: user.id,
+      email: user.email,
+      fullName: user.fullName,
+      loggedInAt: new Date().toISOString()
+    }));
+
+    toast({ 
+      title: "Login successful", 
+      description: `Welcome back, ${user.fullName}!` 
+    });
+    
     navigate("/dashboard");
   };
 
@@ -46,24 +69,26 @@ export default function Login() {
     <div className="min-h-screen bg-background text-foreground">
       <header className="border-b border-border/50 bg-background/70 backdrop-blur-xl">
         <div className="container h-16 flex items-center justify-between">
-          <button type="button" className="text-sm text-muted-foreground hover:text-foreground" onClick={() => navigate("/")}>
+          <button 
+            type="button" 
+            className="text-sm bg-[#3F378B] text-white hover:bg-[#3F378B]/90 px-3 py-1.5 rounded-md transition-colors" 
+            onClick={() => navigate("/")}
+          >
             ← Back to home
           </button>
-          <ThemeToggle />
         </div>
       </header>
 
-      <main className="container py-12 max-w-xl">
+      <main className="container py-12 max-w-md">
         <Card className="shadow-card">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Lock className="h-5 w-5 text-accent" />
-              Login
-            </CardTitle>
-            <CardDescription>Login unlocks only after you apply.</CardDescription>
+            <CardTitle>Welcome Back</CardTitle>
+            <CardDescription>
+              Log in to your account to continue building your startup
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={login} className="space-y-6">
+            <form onSubmit={login} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -71,24 +96,39 @@ export default function Login() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="aarav@college.edu"
-                  autoComplete="email"
+                  placeholder="Enter your email"
                   required
                 />
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
-                <p className="text-xs text-muted-foreground">
-                  Demo login: no password/OTP required.
-                </p>
-                <Button type="submit" variant="hero" disabled={!canLogin}>
-                  Continue <ArrowRight />
-                </Button>
+              <div className="space-y-2">
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                  required
+                />
               </div>
 
-              <Button type="button" variant="outline" className="w-full" onClick={() => navigate("/signup")}>
-                Edit application
+              <Button type="submit" className="w-full bg-[#3F378B] hover:bg-[#3F378B]/90 text-white" variant="hero" disabled={!canLogin}>
+                Log In <ArrowRight />
               </Button>
+
+              <div className="text-center">
+                <p className="text-sm text-muted-foreground">
+                  Don't have an account?{" "}
+                  <button
+                    type="button"
+                    className="text-primary hover:underline"
+                    onClick={() => navigate("/signup")}
+                  >
+                    Sign up
+                  </button>
+                </p>
+              </div>
             </form>
           </CardContent>
         </Card>
@@ -96,4 +136,3 @@ export default function Login() {
     </div>
   );
 }
-
