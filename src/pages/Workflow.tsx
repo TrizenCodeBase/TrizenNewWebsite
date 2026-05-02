@@ -41,7 +41,6 @@ type StageData = {
     challenges: string;
     learnings: string;
     nextSteps: string;
-    githubLink: string;
   };
   stage4: {
     finalDemo: string;
@@ -63,7 +62,7 @@ export default function Workflow() {
   const [stageData, setStageData] = useState<StageData>({
     stage1: { problemUnderstanding: "", targetUsers: "", painPoints: "", solutionApproach: "" },
     stage2: { solutionDesign: "", features: "", techStack: "", mvpScope: "" },
-    stage3: { progress: "", challenges: "", learnings: "", nextSteps: "", githubLink: "" },
+    stage3: { progress: "", challenges: "", learnings: "", nextSteps: "" },
     stage4: { finalDemo: "", achievements: "", metrics: "", futurePlans: "", demoVideo: "", documentation: "" }
   });
 
@@ -140,8 +139,7 @@ export default function Workflow() {
         { name: "progress", label: "Development Progress", type: "textarea", placeholder: "What have you built so far?" },
         { name: "challenges", label: "Challenges Faced", type: "textarea", placeholder: "What challenges did you encounter?" },
         { name: "learnings", label: "Key Learnings", type: "textarea", placeholder: "What did you learn during development?" },
-        { name: "nextSteps", label: "Next Steps", type: "textarea", placeholder: "What are your next development steps?" },
-        { name: "githubLink", label: "GitHub Repository", type: "input", placeholder: "https://github.com/..." }
+        { name: "nextSteps", label: "Next Steps", type: "textarea", placeholder: "What are your next development steps?" }
       ]
     },
     {
@@ -211,10 +209,10 @@ export default function Workflow() {
     } else {
       // Final submission
       toast({
-        title: "Workflow Completed!",
-        description: "Your MVP has been submitted for evaluation.",
+        title: "Submissions Not Open",
+        description: "MVP submissions are not open yet. Please check back later.",
+        variant: "destructive",
       });
-      navigate("/problem-library");
     }
   };
 

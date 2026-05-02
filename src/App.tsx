@@ -18,6 +18,7 @@ import ProductAcademy from "./pages/ProductAcademy.tsx";
 import ProductConnect from "./pages/ProductConnect.tsx";
 import ProductCommunity from "./pages/ProductCommunity.tsx";
 import ProductCourses from "./pages/ProductCourses.tsx";
+import Careers from "./pages/Careers.tsx";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/product-connect" element={<ProductConnect />} />
           <Route path="/product-community" element={<ProductCommunity />} />
           <Route path="/product-courses" element={<ProductCourses />} />
+          <Route path="/careers" element={<Careers />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

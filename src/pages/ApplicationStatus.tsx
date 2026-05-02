@@ -80,25 +80,12 @@ const ApplicationStatus = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!githubUrl || !projectDescription) {
-      toast({
-        title: "Missing Information",
-        description: "Please fill in all required fields.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    if (youtubeUrl && !validateYouTubeUrl(youtubeUrl)) {
-      toast({
-        title: "Invalid YouTube URL",
-        description: "Please enter a valid YouTube URL.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setSubmissionStatus("submitting");
+    toast({
+      title: "Submissions Not Open",
+      description: "Application submissions are not open yet. Please check back later.",
+      variant: "destructive",
+    });
+    return;
     
     // Simulate submission process
     setTimeout(() => {
@@ -249,7 +236,7 @@ const ApplicationStatus = () => {
 
                     <div>
                       <Label htmlFor="demo-video" className="text-sm font-medium">
-                        Demo Video Upload
+                        Demo Video Upload *
                       </Label>
                       <div className="mt-2">
                         {demoVideoFile ? (
@@ -284,6 +271,7 @@ const ApplicationStatus = () => {
                                 accept="video/*"
                                 onChange={handleFileChange}
                                 className="hidden"
+                                required
                               />
                             </label>
                             <p className="text-xs text-muted-foreground mt-1">
@@ -293,13 +281,13 @@ const ApplicationStatus = () => {
                         )}
                       </div>
                       <p className="text-xs text-muted-foreground mt-1">
-                        Optional: Upload a demo video showcasing your project
+                        Upload a demo video showcasing your project
                       </p>
                     </div>
 
                     <div>
                       <Label htmlFor="youtube-url" className="text-sm font-medium">
-                        YouTube Demo Link
+                        YouTube Demo Link *
                       </Label>
                       <div className="relative mt-2">
                         <Youtube className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -310,10 +298,11 @@ const ApplicationStatus = () => {
                           value={youtubeUrl}
                           onChange={(e) => setYoutubeUrl(e.target.value)}
                           className="pl-10 border-[#3F378B] focus:border-[#3F378B] focus:ring-[#3F378B]/20"
+                          required
                         />
                       </div>
                       <p className="text-xs text-muted-foreground mt-1">
-                        Optional: Link to your YouTube demo video
+                        Link to your YouTube demo video
                       </p>
                     </div>
 
@@ -402,40 +391,16 @@ const ApplicationStatus = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Film className="h-4 w-4 text-blue-500" />
-                  <span className="text-sm">Demo video (optional, max 100MB)</span>
+                  <span className="text-sm">Demo video (max 100MB)</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Youtube className="h-4 w-4 text-red-500" />
-                  <span className="text-sm">YouTube demo link (optional)</span>
+                  <span className="text-sm">YouTube demo link</span>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Quick Links */}
-            <Card className="shadow-card">
-              <CardHeader>
-                <CardTitle className="text-lg">Quick Links</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <Button 
-                  variant="outline" 
-                  className="w-full justify-start border-[#3F378B] text-[#3F378B] hover:bg-[#3F378B]/10"
-                  onClick={() => window.open("https://github.com", "_blank")}
-                >
-                  <Github className="h-4 w-4 mr-2" />
-                  GitHub
-                  <ExternalLink className="h-3 w-3 ml-auto" />
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="w-full justify-start border-[#3F378B] text-[#3F378B] hover:bg-[#3F378B]/10"
-                  onClick={() => navigate("/problem-library")}
-                >
-                  <FileText className="h-4 w-4 mr-2" />
-                  Problem Library
-                </Button>
-                              </CardContent>
-            </Card>
+
           </div>
         </div>
       </main>
