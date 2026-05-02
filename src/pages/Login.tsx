@@ -50,19 +50,31 @@ export default function Login() {
     }
 
     // Store login state
-    localStorage.setItem(STORAGE_LOGGED_IN_KEY, JSON.stringify({
+    const authData = {
       userId: user.id,
       email: user.email,
       fullName: user.fullName,
       loggedInAt: new Date().toISOString()
-    }));
+    };
+    localStorage.setItem(STORAGE_LOGGED_IN_KEY, JSON.stringify(authData));
+    
+    // Store user info for navbar
+    localStorage.setItem("trizen.user", JSON.stringify(authData));
 
     toast({ 
       title: "Login successful", 
       description: `Welcome back, ${user.fullName}!` 
     });
     
-    navigate("/dashboard");
+    // Check if there's a redirect URL stored
+    const redirectUrl = localStorage.getItem("trizen.redirectAfterLogin");
+    if (redirectUrl) {
+      localStorage.removeItem("trizen.redirectAfterLogin");
+      navigate(redirectUrl);
+    } else {
+      // Always redirect to problem library since dashboard is removed
+      navigate("/problem-library");
+    }
   };
 
   return (

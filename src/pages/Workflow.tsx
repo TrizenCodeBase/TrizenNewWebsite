@@ -214,7 +214,7 @@ export default function Workflow() {
         title: "Workflow Completed!",
         description: "Your MVP has been submitted for evaluation.",
       });
-      navigate("/dashboard");
+      navigate("/problem-library");
     }
   };
 

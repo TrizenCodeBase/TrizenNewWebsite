@@ -7,13 +7,17 @@ import Index from "./pages/Index.tsx";
 import Enquiry from "./pages/Enquiry.tsx";
 import Login from "./pages/Login.tsx";
 import Signup from "./pages/Signup.tsx";
-import Dashboard from "./pages/Dashboard.tsx";
 import ProblemLibrary from "./pages/ProblemLibrary.tsx";
 import Workflow from "./pages/Workflow.tsx";
 import ApplicationStatus from "./pages/ApplicationStatus.tsx";
 import Privacy from "./pages/Privacy.tsx";
 import Terms from "./pages/Terms.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import ProductHR from "./pages/ProductHR.tsx";
+import ProductAcademy from "./pages/ProductAcademy.tsx";
+import ProductConnect from "./pages/ProductConnect.tsx";
+import ProductCommunity from "./pages/ProductCommunity.tsx";
+import ProductCourses from "./pages/ProductCourses.tsx";
 
 const queryClient = new QueryClient();
 
@@ -27,13 +31,17 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/problem-library" element={<ProblemLibrary />} />
           <Route path="/workflow" element={<Workflow />} />
           <Route path="/application-status" element={<ApplicationStatus />} />
           <Route path="/enquiry" element={<Enquiry />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/product-hr" element={<ProductHR />} />
+          <Route path="/product-academy" element={<ProductAcademy />} />
+          <Route path="/product-connect" element={<ProductConnect />} />
+          <Route path="/product-community" element={<ProductCommunity />} />
+          <Route path="/product-courses" element={<ProductCourses />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { 
   ArrowRight, 
@@ -32,6 +32,14 @@ const ApplicationStatus = () => {
   const [demoVideoFile, setDemoVideoFile] = useState<File | null>(null);
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [submissionStatus, setSubmissionStatus] = useState<"idle" | "submitting" | "submitted">("idle");
+
+  // Check if user is logged in
+  useEffect(() => {
+    const authData = localStorage.getItem("trizen.auth.loggedIn");
+    if (!authData) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -426,15 +434,7 @@ const ApplicationStatus = () => {
                   <FileText className="h-4 w-4 mr-2" />
                   Problem Library
                 </Button>
-                <Button 
-                  variant="outline" 
-                  className="w-full justify-start border-[#3F378B] text-[#3F378B] hover:bg-[#3F378B]/10"
-                  onClick={() => navigate("/dashboard")}
-                >
-                  <AlertCircle className="h-4 w-4 mr-2" />
-                  Dashboard
-                </Button>
-              </CardContent>
+                              </CardContent>
             </Card>
           </div>
         </div>
